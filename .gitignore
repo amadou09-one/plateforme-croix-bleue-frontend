@@ -1,0 +1,12 @@
+node_modules/
+dist/
+
+# Documents internes de gestion de projet (non versionnés)
+00-README.md
+01-APP-SPEC.md
+02-BRAND-BRIEF.md
+03-DATA-DICTIONARY.md
+04-CLAUDE.md
+05-FEATURE-BACKLOG.md
+06-INTEGRATION.md
+07-JOURNAL-ERREUR.md
