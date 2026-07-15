@@ -1,5 +1,7 @@
 node_modules/
 dist/
+.env
+.env.local
 
 # Documents internes de gestion de projet (non versionnés)
 00-README.md
