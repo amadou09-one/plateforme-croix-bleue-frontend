@@ -1,0 +1,189 @@
+/* Espace Patient — extrait des maquettes docs/maquettes/patient-*.html
+   Tout est scopé sous .patient-app pour ne jamais fuiter sur le site vitrine
+   (site.css définit des classes du même nom : .btn, .card, .badge, .doc, .grid-4…) */
+
+.patient-app {
+  --blue: #007BFF;
+  --blue-dark: #0062CC;
+  --blue-light: #E8F2FF;
+  --green: #28A745;
+  --green-light: #E9F9EF;
+  --white: #FFFFFF;
+  --bg: #F5F7FA;
+  --txt: #1F2937;
+  --sub: #6B7280;
+  --gray: #D1D5DB;
+  --danger: #EF4444;
+  --danger-light: #FEE2E2;
+  --warn: #F59E0B;
+  --warn-light: #FEF3C7;
+  --r: 18px;
+  --shadow: 0 12px 32px rgba(15, 35, 70, .08);
+
+  font-family: 'Poppins', sans-serif;
+  color: var(--txt);
+  background: var(--bg);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.patient-app, .patient-app * { box-sizing: border-box; }
+.patient-app a { text-decoration: none; color: inherit; }
+.patient-app button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.patient-app .app { display: grid; grid-template-columns: 264px 1fr; min-height: 100vh; }
+
+/* SIDEBAR */
+.patient-app .sidebar { background: #fff; border-right: 1px solid #EAEEF4; padding: 24px 18px; display: flex; flex-direction: column; gap: 8px; position: sticky; top: 0; height: 100vh; }
+.patient-app .logo { display: flex; align-items: center; gap: 12px; padding: 4px 10px 22px; }
+.patient-app .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--blue), #3D9BFF); display: grid; place-items: center; color: #fff; font-size: 20px; font-weight: 700; }
+.patient-app .logo b { font-size: 15.5px; font-weight: 700; display: block; line-height: 1.2; }
+.patient-app .logo span { font-size: 10.5px; color: var(--sub); }
+.patient-app .nav-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding: 10px 12px 6px; }
+.patient-app .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 13px; font-size: 14.5px; font-weight: 500; color: var(--sub); }
+.patient-app .nav-item:hover { background: var(--bg); color: var(--txt); }
+.patient-app .nav-item.active { background: var(--blue); color: #fff; font-weight: 600; box-shadow: 0 8px 18px rgba(0, 123, 255, .28); }
+.patient-app .nav-item .ic { width: 22px; text-align: center; }
+.patient-app .sidebar-foot { margin-top: auto; border-top: 1px solid #EAEEF4; padding-top: 16px; }
+
+/* TOPBAR / PROFIL */
+.patient-app .top-user { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #EAEEF4; border-radius: 13px; padding: 6px 14px 6px 7px; position: relative; cursor: pointer; }
+.patient-app .user-menu { position: absolute; top: calc(100% + 10px); right: 0; background: #fff; border: 1px solid #EAEEF4; border-radius: 14px; box-shadow: var(--shadow); padding: 8px; width: 196px; z-index: 20; }
+.patient-app .user-menu button, .patient-app .user-menu a { display: flex; width: 100%; align-items: center; gap: 11px; padding: 11px 13px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: var(--txt); text-align: left; }
+.patient-app .user-menu button:hover, .patient-app .user-menu a:hover { background: var(--bg); }
+.patient-app .um-sep { height: 1px; background: #F0F3F8; margin: 5px 8px; }
+.patient-app .um-danger { color: var(--danger) !important; }
+.patient-app .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #CFE4FF, #EAF3FF); display: grid; place-items: center; font-size: 18px; flex: 0 0 auto; }
+
+/* MAIN */
+.patient-app .main { padding: 28px 34px; display: flex; flex-direction: column; gap: 24px; }
+.patient-app .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.patient-app .page-title h1 { font-size: 24px; font-weight: 700; }
+.patient-app .page-title p { font-size: 13.5px; color: var(--sub); }
+.patient-app .top-actions { display: flex; align-items: center; gap: 14px; }
+.patient-app .icon-btn { width: 44px; height: 44px; border-radius: 13px; background: #fff; border: 1px solid #EAEEF4; display: grid; place-items: center; font-size: 18px; position: relative; }
+.patient-app .dot { position: absolute; top: 9px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--danger); border: 2px solid #fff; }
+
+.patient-app .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 13px; }
+.patient-app .btn:disabled { opacity: .6; cursor: default; }
+.patient-app .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 18px rgba(0, 123, 255, .28); }
+.patient-app .btn-outline { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); }
+.patient-app .btn-ghost { background: #fff; color: var(--sub); border: 1.5px solid var(--gray); }
+.patient-app .btn-danger { background: #fff; color: var(--danger); border: 1.5px solid var(--danger); }
+.patient-app .btn-sm { padding: 9px 16px; font-size: 13px; border-radius: 11px; }
+
+/* CARDS */
+.patient-app .card { background: #fff; border: 1px solid #EAEEF4; border-radius: var(--r); padding: 22px; }
+.patient-app .card.clickable { cursor: pointer; transition: box-shadow .15s ease, border-color .15s ease; }
+.patient-app .card.clickable:hover { box-shadow: var(--shadow); border-color: #DCE4EF; }
+.patient-app .card.selected { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); }
+.patient-app .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.patient-app .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.patient-app .grid-2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; align-items: start; }
+.patient-app .stat { display: flex; align-items: center; gap: 15px; }
+.patient-app .stat .ic { width: 52px; height: 52px; border-radius: 14px; background: var(--blue-light); display: grid; place-items: center; font-size: 23px; flex: 0 0 auto; }
+.patient-app .stat b { font-size: 22px; font-weight: 700; display: block; line-height: 1.2; }
+.patient-app .stat span { font-size: 12.5px; color: var(--sub); }
+.patient-app .card h3 { font-size: 16.5px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+.patient-app .card h3 a, .patient-app .card h3 button { font-size: 12.5px; color: var(--blue); font-weight: 600; }
+
+/* BADGES */
+.patient-app .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.patient-app .b-green { background: var(--green-light); color: #16A34A; }
+.patient-app .b-blue { background: var(--blue-light); color: var(--blue); }
+.patient-app .b-warn { background: var(--warn-light); color: #B45309; }
+.patient-app .b-red { background: var(--danger-light); color: var(--danger); }
+.patient-app .b-gray { background: #F1F5F9; color: var(--sub); }
+
+/* RDV ROWS */
+.patient-app .rdv { display: flex; align-items: center; gap: 16px; padding: 15px 6px; border-bottom: 1px solid #F0F3F8; flex-wrap: wrap; }
+.patient-app .rdv:last-child { border-bottom: none; }
+.patient-app .date-block { width: 58px; height: 58px; border-radius: 14px; background: var(--blue-light); display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 0 0 auto; }
+.patient-app .date-block.muted { background: #F1F5F9; }
+.patient-app .date-block b { font-size: 19px; color: var(--blue); line-height: 1.1; }
+.patient-app .date-block.muted b { color: var(--sub); }
+.patient-app .date-block span { font-size: 10.5px; color: var(--blue); font-weight: 600; text-transform: uppercase; }
+.patient-app .date-block.muted span { color: var(--sub); }
+.patient-app .rdv-info { flex: 1; min-width: 200px; }
+.patient-app .rdv-info b { font-size: 14.5px; display: block; }
+.patient-app .rdv-info span { font-size: 12.5px; color: var(--sub); }
+.patient-app .rdv-actions { display: flex; gap: 8px; }
+
+/* SEARCH + CHIPS */
+.patient-app .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.patient-app .chip { padding: 9px 18px; border-radius: 999px; background: #fff; border: 1.5px solid var(--gray); font-size: 13px; font-weight: 500; color: var(--sub); }
+.patient-app .chip.active { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
+
+/* DOCTORS */
+.patient-app .doc { overflow: hidden; padding: 0; display: flex; flex-direction: column; }
+.patient-app .doc-photo { height: 150px; background: linear-gradient(150deg, #CFE4FF, #EAF3FF); display: grid; place-items: center; font-size: 52px; }
+.patient-app .doc-body { padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.patient-app .doc-body b { font-size: 15px; }
+.patient-app .doc-body .spec { color: var(--blue); font-size: 13px; font-weight: 600; }
+.patient-app .doc-body .meta { font-size: 12px; color: var(--sub); }
+
+/* STEPPER */
+.patient-app .stepper { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #EAEEF4; border-radius: 16px; padding: 18px 22px; flex-wrap: wrap; }
+.patient-app .stp { display: flex; align-items: center; gap: 11px; flex: 1; min-width: 120px; }
+.patient-app .stp .n { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; font-weight: 700; background: #F1F5F9; color: var(--sub); flex: 0 0 auto; }
+.patient-app .stp.done .n { background: var(--green-light); color: #16A34A; }
+.patient-app .stp.current .n { background: var(--blue); color: #fff; box-shadow: 0 6px 14px rgba(0, 123, 255, .3); }
+.patient-app .stp b { font-size: 13px; display: block; line-height: 1.25; }
+.patient-app .stp span { font-size: 11px; color: var(--sub); }
+.patient-app .stp-sep { flex: 0 0 34px; height: 2px; background: #E5EAF1; border-radius: 2px; }
+
+/* CALENDRIER */
+.patient-app .cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.patient-app .cal-head b { font-size: 15px; }
+.patient-app .cal-nav { display: flex; gap: 8px; }
+.patient-app .cal-nav button { width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid var(--gray); display: grid; place-items: center; color: var(--sub); font-size: 15px; }
+.patient-app .cal-nav button:disabled { opacity: .4; cursor: default; }
+.patient-app .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; }
+.patient-app .cal .dow { font-size: 11px; font-weight: 600; color: var(--sub); padding: 6px 0; text-transform: uppercase; }
+.patient-app .cal .day { padding: 10px 0; border-radius: 11px; font-size: 13.5px; font-weight: 500; }
+.patient-app .cal .day.off { color: #C3CAD5; }
+.patient-app .cal .day.sel { background: var(--blue); color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(0, 123, 255, .3); }
+.patient-app .cal .day.today:not(.sel) { border: 1.5px solid var(--blue); color: var(--blue); font-weight: 700; }
+
+/* CRENEAUX */
+.patient-app .slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.patient-app .slot { padding: 12px 0; border-radius: 12px; border: 1.5px solid var(--gray); text-align: center; font-size: 13.5px; font-weight: 600; color: var(--txt); background: #fff; }
+.patient-app .slot.sel { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 6px 14px rgba(0, 123, 255, .3); }
+.patient-app .slot.off { background: #F1F5F9; border-color: #F1F5F9; color: #C3CAD5; text-decoration: line-through; cursor: default; }
+
+/* TABS */
+.patient-app .tabs { display: flex; gap: 8px; background: #fff; border: 1px solid #EAEEF4; border-radius: 14px; padding: 7px; width: fit-content; }
+.patient-app .tab { padding: 10px 22px; border-radius: 10px; font-size: 13.5px; font-weight: 600; color: var(--sub); }
+.patient-app .tab.active { background: var(--blue); color: #fff; }
+
+.patient-app .recap { display: flex; flex-direction: column; gap: 12px; }
+.patient-app .recap .row { display: flex; justify-content: space-between; font-size: 13.5px; padding-bottom: 11px; border-bottom: 1px dashed #E5EAF1; }
+.patient-app .recap .row span { color: var(--sub); }
+.patient-app .recap .row b { font-size: 13.5px; }
+
+/* FORM (motif, textarea) */
+.patient-app .field { margin-bottom: 4px; }
+.patient-app .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.patient-app textarea.input, .patient-app input.input { width: 100%; font-family: inherit; font-size: 14px; color: var(--txt); border: 1.5px solid var(--gray); border-radius: 12px; padding: 12px 15px; background: #fff; resize: vertical; }
+.patient-app textarea.input:focus, .patient-app input.input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(0, 123, 255, .12); }
+
+/* ÉTATS */
+.patient-app .empty-state { text-align: center; padding: 30px 20px; color: var(--sub); font-size: 13.5px; }
+.patient-app .alert-error { background: var(--danger-light); color: #991B1B; border-radius: 12px; padding: 13px 16px; font-size: 13.5px; }
+.patient-app .alert-info { background: var(--blue-light); border: 1px solid #DCE8FF; border-radius: var(--r); padding: 16px 18px; font-size: 13px; color: var(--txt); }
+.patient-app .success-screen { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 50px 20px; }
+.patient-app .success-icon { width: 74px; height: 74px; border-radius: 50%; background: var(--green-light); display: grid; place-items: center; font-size: 36px; margin-bottom: 8px; }
+
+/* MODALE */
+.patient-app .modal-backdrop { position: fixed; inset: 0; background: rgba(15, 25, 45, .45); display: grid; place-items: center; z-index: 50; padding: 20px; }
+.patient-app .modal { background: #fff; border-radius: var(--r); padding: 26px; width: 100%; max-width: 400px; box-shadow: var(--shadow); }
+.patient-app .modal h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.patient-app .modal p { font-size: 13.5px; color: var(--sub); margin-bottom: 20px; }
+.patient-app .modal-actions { display: flex; gap: 10px; }
+.patient-app .modal-actions .btn { flex: 1; }
+
+@media (max-width: 980px) {
+  .patient-app .app { grid-template-columns: 1fr; }
+  .patient-app .sidebar { display: none; }
+  .patient-app .grid-2, .patient-app .grid-3, .patient-app .grid-4 { grid-template-columns: 1fr; }
+  .patient-app .slots { grid-template-columns: repeat(2, 1fr); }
+}
