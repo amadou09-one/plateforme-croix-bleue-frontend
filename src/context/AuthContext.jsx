@@ -52,7 +52,11 @@ export function AuthProvider({ children }) {
     setUser(null);
   }
 
-  const value = { user, loading, login, register, logout };
+  function updateUser(patch) {
+    setUser((current) => (current ? { ...current, ...patch } : current));
+  }
+
+  const value = { user, loading, login, register, logout, updateUser };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

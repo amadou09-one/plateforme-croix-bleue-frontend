@@ -128,7 +128,7 @@ export default function PatientBook() {
         <Topbar title="Rendez-vous confirmé" />
         <div className="card success-screen">
           <div className="success-icon">✅</div>
-          <h2 style={{ fontSize: 22, fontWeight: 700 }}>Rendez-vous confirmé</h2>
+          <h2 style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.3, letterSpacing: "normal" }}>Rendez-vous confirmé</h2>
           <p style={{ color: "var(--sub)", maxWidth: 440 }}>
             Votre rendez-vous avec <b>Dr {medecin.user.prenom} {medecin.user.nom}</b> ({medecin.specialite.nom}) le{" "}
             <b>{formatDateLongLocale(selectedDate)}</b> à <b>{formatHeureSlot(selectedHeure)}</b> a bien été enregistré.

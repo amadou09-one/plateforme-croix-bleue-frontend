@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
+import NotificationBell from "./NotificationBell.jsx";
+
+function initiales(user) {
+  const a = user?.prenom?.charAt(0) ?? "";
+  const b = user?.nom?.charAt(0) ?? "";
+  return (a + b).toUpperCase();
+}
 
 export default function Topbar({ title, subtitle, actions }) {
   const { user, logout } = useAuth();
@@ -30,12 +37,10 @@ export default function Topbar({ title, subtitle, actions }) {
         {subtitle && <p>{subtitle}</p>}
       </div>
       <div className="top-actions">
-        <div className="icon-btn">
-          🔔<span className="dot"></span>
-        </div>
+        <NotificationBell />
         <div className="top-user" ref={menuRef} onClick={() => setMenuOpen((v) => !v)}>
-          <div className="avatar" style={{ width: 34, height: 34, fontSize: 15 }}>
-            {user?.sexe === "M" ? "🧑🏾" : "👩🏾"}
+          <div className="avatar" style={{ width: 34, height: 34, fontSize: 13, fontWeight: 700, color: "var(--blue-dark)" }}>
+            {initiales(user)}
           </div>
           <div>
             <b style={{ fontSize: 13, display: "block", lineHeight: 1.2 }}>
@@ -48,7 +53,8 @@ export default function Topbar({ title, subtitle, actions }) {
           <span style={{ color: "var(--sub)", fontSize: 12 }}>▾</span>
           {menuOpen && (
             <div className="user-menu">
-              <Link to="/patient">👤 Mon profil</Link>
+              <Link to="/patient/profile">👤 Mon profil</Link>
+              <Link to="/patient/parametres">⚙️ Paramètres</Link>
               <div className="um-sep"></div>
               <button type="button" className="um-danger" onClick={handleLogout} disabled={loggingOut}>
                 🚪 {loggingOut ? "Déconnexion…" : "Déconnexion"}

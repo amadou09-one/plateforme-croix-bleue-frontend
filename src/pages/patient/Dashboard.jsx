@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Topbar from "../../components/patient/Topbar.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { getMesRendezVous } from "../../services/rendezvous.js";
+import { getNonLuesCount } from "../../services/notifications.js";
 import {
   formatDateCourtApi,
   formatMoisCourtApi,
@@ -24,11 +25,15 @@ export default function PatientDashboard() {
   const { user } = useAuth();
   const [rdv, setRdv] = useState(null);
   const [error, setError] = useState("");
+  const [notifNonLues, setNotifNonLues] = useState(0);
 
   useEffect(() => {
     getMesRendezVous()
       .then(setRdv)
       .catch((err) => setError(extractErrorMessage(err)));
+    getNonLuesCount()
+      .then(setNotifNonLues)
+      .catch(() => {});
   }, []);
 
   const aVenir = rdv?.a_venir ?? [];
@@ -57,7 +62,7 @@ export default function PatientDashboard() {
 
       {rdv && (
         <>
-          <div className="grid-3">
+          <div className="grid-4">
             <div className="card stat">
               <div className="ic">📅</div>
               <div>
@@ -77,6 +82,13 @@ export default function PatientDashboard() {
               <div>
                 <b>{nbHonores}</b>
                 <span>RDV honorés</span>
+              </div>
+            </div>
+            <div className="card stat">
+              <div className="ic">🔔</div>
+              <div>
+                <b>{notifNonLues}</b>
+                <span>Notifications</span>
               </div>
             </div>
           </div>

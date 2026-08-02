@@ -1,6 +1,15 @@
 /* Espace Patient — extrait des maquettes docs/maquettes/patient-*.html
    Tout est scopé sous .patient-app pour ne jamais fuiter sur le site vitrine
-   (site.css définit des classes du même nom : .btn, .card, .badge, .doc, .grid-4…) */
+   (site.css définit des classes du même nom : .btn, .card, .badge, .doc, .grid-4,
+   .topbar, .logo, .avatar, h1/h2/h3…).
+
+   ATTENTION : une règle plus spécifique (.patient-app .topbar) ne "masque" PAS
+   entièrement une règle moins spécifique (.topbar de site.css) — la cascade CSS
+   s'applique PROPRIÉTÉ PAR PROPRIÉTÉ. Si .patient-app .topbar ne déclare pas
+   `background`, et que .topbar (site.css) déclare `background:var(--blue)`, cette
+   déclaration s'applique quand même (c'est la seule règle qui la définit pour cet
+   élément). Chaque règle ci-dessous doit donc déclarer EXPLICITEMENT toutes les
+   propriétés que la classe homonyme de site.css définit, même pour "l'annuler". */
 
 .patient-app {
   --blue: #007BFF;
@@ -35,7 +44,7 @@
 /* SIDEBAR */
 .patient-app .sidebar { background: #fff; border-right: 1px solid #EAEEF4; padding: 24px 18px; display: flex; flex-direction: column; gap: 8px; position: sticky; top: 0; height: 100vh; }
 .patient-app .logo { display: flex; align-items: center; gap: 12px; padding: 4px 10px 22px; }
-.patient-app .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--blue), #3D9BFF); display: grid; place-items: center; color: #fff; font-size: 20px; font-weight: 700; }
+.patient-app .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--blue), #3D9BFF); display: grid; place-items: center; color: #fff; font-size: 20px; font-weight: 700; box-shadow: none; }
 .patient-app .logo b { font-size: 15.5px; font-weight: 700; display: block; line-height: 1.2; }
 .patient-app .logo span { font-size: 10.5px; color: var(--sub); }
 .patient-app .nav-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding: 10px 12px 6px; }
@@ -56,14 +65,17 @@
 
 /* MAIN */
 .patient-app .main { padding: 28px 34px; display: flex; flex-direction: column; gap: 24px; }
-.patient-app .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-.patient-app .page-title h1 { font-size: 24px; font-weight: 700; }
-.patient-app .page-title p { font-size: 13.5px; color: var(--sub); }
+.patient-app .topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  background: transparent; color: var(--txt); font-size: inherit; font-weight: 400;
+}
+.patient-app .page-title h1 { font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: normal; color: var(--txt); }
+.patient-app .page-title p { font-size: 13.5px; color: var(--sub); line-height: 1.5; letter-spacing: normal; }
 .patient-app .top-actions { display: flex; align-items: center; gap: 14px; }
 .patient-app .icon-btn { width: 44px; height: 44px; border-radius: 13px; background: #fff; border: 1px solid #EAEEF4; display: grid; place-items: center; font-size: 18px; position: relative; }
 .patient-app .dot { position: absolute; top: 9px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--danger); border: 2px solid #fff; }
 
-.patient-app .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 13px; }
+.patient-app .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: inherit; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 13px; border: none; cursor: pointer; transition: none; }
 .patient-app .btn:disabled { opacity: .6; cursor: default; }
 .patient-app .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 18px rgba(0, 123, 255, .28); }
 .patient-app .btn-outline { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); }
@@ -72,7 +84,8 @@
 .patient-app .btn-sm { padding: 9px 16px; font-size: 13px; border-radius: 11px; }
 
 /* CARDS */
-.patient-app .card { background: #fff; border: 1px solid #EAEEF4; border-radius: var(--r); padding: 22px; }
+.patient-app .card { background: #fff; border: 1px solid #EAEEF4; border-radius: var(--r); padding: 22px; transition: none; }
+.patient-app .card:hover { transform: none; box-shadow: none; }
 .patient-app .card.clickable { cursor: pointer; transition: box-shadow .15s ease, border-color .15s ease; }
 .patient-app .card.clickable:hover { box-shadow: var(--shadow); border-color: #DCE4EF; }
 .patient-app .card.selected { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); }
@@ -83,11 +96,11 @@
 .patient-app .stat .ic { width: 52px; height: 52px; border-radius: 14px; background: var(--blue-light); display: grid; place-items: center; font-size: 23px; flex: 0 0 auto; }
 .patient-app .stat b { font-size: 22px; font-weight: 700; display: block; line-height: 1.2; }
 .patient-app .stat span { font-size: 12.5px; color: var(--sub); }
-.patient-app .card h3 { font-size: 16.5px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+.patient-app .card h3 { font-size: 16.5px; font-weight: 600; line-height: 1.3; letter-spacing: normal; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
 .patient-app .card h3 a, .patient-app .card h3 button { font-size: 12.5px; color: var(--blue); font-weight: 600; }
 
 /* BADGES */
-.patient-app .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.patient-app .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: #F1F5F9; color: var(--sub); }
 .patient-app .b-green { background: var(--green-light); color: #16A34A; }
 .patient-app .b-blue { background: var(--blue-light); color: var(--blue); }
 .patient-app .b-warn { background: var(--warn-light); color: #B45309; }
@@ -115,8 +128,8 @@
 
 /* DOCTORS */
 .patient-app .doc { overflow: hidden; padding: 0; display: flex; flex-direction: column; }
-.patient-app .doc-photo { height: 150px; background: linear-gradient(150deg, #CFE4FF, #EAF3FF); display: grid; place-items: center; font-size: 52px; }
-.patient-app .doc-body { padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.patient-app .doc-photo { height: 150px; aspect-ratio: auto; background: linear-gradient(150deg, #CFE4FF, #EAF3FF); display: grid; place-items: center; font-size: 52px; }
+.patient-app .doc-body { padding: 18px; display: flex; flex-direction: column; gap: 8px; flex: initial; }
 .patient-app .doc-body b { font-size: 15px; }
 .patient-app .doc-body .spec { color: var(--blue); font-size: 13px; font-weight: 600; }
 .patient-app .doc-body .meta { font-size: 12px; color: var(--sub); }
@@ -181,9 +194,48 @@
 .patient-app .modal-actions { display: flex; gap: 10px; }
 .patient-app .modal-actions .btn { flex: 1; }
 
+/* PARAMÈTRES — toggles */
+.patient-app .set-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 2px; border-bottom: 1px solid #F0F3F8; }
+.patient-app .set-row:last-child { border-bottom: none; }
+.patient-app .set-row b { font-size: 13.5px; display: block; }
+.patient-app .set-row span { font-size: 12px; color: var(--sub); }
+.patient-app .switch { width: 44px; height: 24px; border-radius: 999px; background: var(--gray); position: relative; flex: 0 0 auto; border: none; padding: 0; }
+.patient-app .switch::after { content: ""; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 3px; left: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, .2); }
+.patient-app .switch.on { background: var(--blue); }
+.patient-app .switch.on::after { left: auto; right: 3px; }
+.patient-app .switch:disabled { opacity: .6; cursor: default; }
+
+/* CHAMPS — erreur de validation */
+.patient-app .field-error { color: var(--danger); font-size: 11.5px; margin-top: 4px; display: block; }
+
+/* NOTIFICATIONS — cloche + dropdown */
+.patient-app .notif-bell { position: relative; }
+.patient-app .notif-dropdown { width: 340px; max-height: 420px; overflow-y: auto; padding: 14px; }
+.patient-app .notif-dropdown-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.patient-app .notif-dropdown-head b { font-size: 14px; }
+.patient-app .notif-tout-lu { font-size: 12px; color: var(--blue); font-weight: 600; }
+.patient-app .notif { display: flex; gap: 13px; padding: 13px 6px; border-bottom: 1px solid #F0F3F8; cursor: pointer; border-radius: 12px; }
+.patient-app .notif:last-child { border-bottom: none; }
+.patient-app .notif:hover { background: var(--bg); }
+.patient-app .notif.unread { background: var(--blue-light); }
+.patient-app .notif.unread:hover { background: var(--blue-light); }
+.patient-app .notif .ic { width: 40px; height: 40px; border-radius: 12px; background: #fff; display: grid; place-items: center; font-size: 16px; flex: 0 0 auto; }
+.patient-app .notif b { font-size: 13px; display: block; font-weight: 500; line-height: 1.4; }
+.patient-app .notif span { font-size: 11.5px; color: var(--sub); }
+
+/* TOAST */
+.patient-app .toast-stack { position: fixed; top: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+.patient-app .toast { padding: 14px 18px; border-radius: 13px; font-size: 13.5px; font-weight: 600; color: #fff; box-shadow: var(--shadow); cursor: pointer; max-width: 320px; }
+.patient-app .toast-success { background: #16A34A; }
+.patient-app .toast-error { background: var(--danger); }
+.patient-app .toast-info { background: var(--blue); }
+
 @media (max-width: 980px) {
   .patient-app .app { grid-template-columns: 1fr; }
   .patient-app .sidebar { display: none; }
   .patient-app .grid-2, .patient-app .grid-3, .patient-app .grid-4 { grid-template-columns: 1fr; }
   .patient-app .slots { grid-template-columns: repeat(2, 1fr); }
+  .patient-app .notif-dropdown { width: calc(100vw - 48px); }
+  .patient-app .toast-stack { left: 16px; right: 16px; top: 16px; }
+  .patient-app .toast { max-width: none; }
 }
