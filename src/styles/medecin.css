@@ -1,0 +1,209 @@
+/* Espace Médecin — extrait de docs/maquettes/medecin-dashboard.html
+   Tout est scopé sous .medecin-app pour ne jamais fuiter sur le site vitrine ni sur
+   l'Espace Patient (site.css et app.css définissent des classes du même nom : .btn,
+   .card, .badge, .grid-4, .icon-btn, .avatar, .user-menu…).
+
+   ATTENTION : la cascade CSS s'applique PROPRIÉTÉ PAR PROPRIÉTÉ, pas règle par règle
+   (voir app.css) — chaque règle ci-dessous déclare explicitement toutes les propriétés
+   que la classe homonyme de site.css/app.css définit, même pour "l'annuler". */
+
+.medecin-app {
+  --blue: #0EA5E9;
+  --blue-dark: #0284C7;
+  --blue-light: #E0F2FE;
+  --green: #28A745;
+  --green-light: #E9F9EF;
+  --white: #FFFFFF;
+  --bg: #F5F7FA;
+  --txt: #1F2937;
+  --sub: #6B7280;
+  --gray: #D1D5DB;
+  --danger: #EF4444;
+  --danger-light: #FEE2E2;
+  --warn: #F59E0B;
+  --warn-light: #FEF3C7;
+  --r: 18px;
+  --shadow: 0 12px 32px rgba(15, 35, 70, .08);
+
+  font-family: 'Poppins', sans-serif;
+  color: var(--txt);
+  background: var(--bg);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.medecin-app, .medecin-app * { box-sizing: border-box; }
+.medecin-app a { text-decoration: none; color: inherit; }
+.medecin-app button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.medecin-app .app { display: grid; grid-template-columns: 264px 1fr; min-height: 100vh; }
+
+/* SIDEBAR — harmonisée avec l'Espace Patient (fond blanc), accent cyan conservé
+   pour l'état actif afin de garder l'identité visuelle propre à l'Espace Médecin. */
+.medecin-app .sidebar { background: #fff; border-right: 1px solid #EAEEF4; padding: 24px 18px; display: flex; flex-direction: column; gap: 8px; position: sticky; top: 0; height: 100vh; }
+.medecin-app .logo { display: flex; align-items: center; gap: 12px; padding: 4px 10px 22px; }
+.medecin-app .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--blue), #38BDF8); display: grid; place-items: center; color: #fff; font-size: 20px; font-weight: 700; box-shadow: none; }
+.medecin-app .logo b { font-size: 15.5px; font-weight: 700; display: block; line-height: 1.2; color: var(--txt); }
+.medecin-app .logo span { font-size: 10.5px; color: var(--sub); }
+.medecin-app .nav-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding: 10px 12px 6px; }
+.medecin-app .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 13px; font-size: 14.5px; font-weight: 500; color: var(--sub); }
+.medecin-app .nav-item:hover { background: var(--bg); color: var(--txt); }
+.medecin-app .nav-item.active { background: var(--blue); color: #fff; font-weight: 600; box-shadow: 0 8px 18px rgba(14, 165, 233, .35); }
+.medecin-app .nav-item .ic { width: 22px; text-align: center; }
+.medecin-app .sidebar-foot { margin-top: auto; border-top: 1px solid #EAEEF4; padding-top: 16px; }
+
+/* TOPBAR / PROFIL */
+.medecin-app .top-user { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #EAEEF4; border-radius: 13px; padding: 6px 14px 6px 7px; position: relative; cursor: pointer; }
+.medecin-app .user-menu { position: absolute; top: calc(100% + 10px); right: 0; background: #fff; border: 1px solid #EAEEF4; border-radius: 14px; box-shadow: var(--shadow); padding: 8px; width: 196px; z-index: 20; }
+.medecin-app .user-menu button, .medecin-app .user-menu a { display: flex; width: 100%; align-items: center; gap: 11px; padding: 11px 13px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: var(--txt); text-align: left; }
+.medecin-app .user-menu button:hover, .medecin-app .user-menu a:hover { background: var(--bg); }
+.medecin-app .um-sep { height: 1px; background: #F0F3F8; margin: 5px 8px; }
+.medecin-app .um-danger { color: var(--danger) !important; }
+.medecin-app .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #BAE6FD, #E0F2FE); display: grid; place-items: center; font-size: 18px; flex: 0 0 auto; }
+
+/* MAIN */
+.medecin-app .main { padding: 28px 34px; display: flex; flex-direction: column; gap: 24px; }
+.medecin-app .app-topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  background: transparent; color: var(--txt); font-size: inherit; font-weight: 400;
+}
+.medecin-app .page-title h1 { font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: normal; color: var(--txt); }
+.medecin-app .page-title p { font-size: 13.5px; color: var(--sub); line-height: 1.5; letter-spacing: normal; }
+.medecin-app .top-actions { display: flex; align-items: center; gap: 14px; }
+.medecin-app .icon-btn { width: 44px; height: 44px; border-radius: 13px; background: #fff; border: 1px solid #EAEEF4; display: grid; place-items: center; font-size: 18px; position: relative; }
+.medecin-app .dot { position: absolute; top: 9px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--danger); border: 2px solid #fff; }
+
+.medecin-app .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: inherit; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 13px; border: none; cursor: pointer; transition: none; }
+.medecin-app .btn:disabled { opacity: .6; cursor: default; }
+.medecin-app .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 18px rgba(14, 165, 233, .3); }
+.medecin-app .btn-outline { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); }
+.medecin-app .btn-ghost { background: #fff; color: var(--sub); border: 1.5px solid var(--gray); }
+.medecin-app .btn-danger { background: #fff; color: var(--danger); border: 1.5px solid var(--danger); }
+.medecin-app .btn-green { background: #fff; color: #16A34A; border: 1.5px solid #16A34A; }
+.medecin-app .btn-sm { padding: 9px 16px; font-size: 13px; border-radius: 11px; }
+
+/* CARDS */
+.medecin-app .card { background: #fff; border: 1px solid #EAEEF4; border-radius: var(--r); padding: 22px; transition: none; }
+.medecin-app .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.medecin-app .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.medecin-app .grid-2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; align-items: start; }
+.medecin-app .stat { display: flex; align-items: center; gap: 15px; }
+.medecin-app .stat .ic { width: 52px; height: 52px; border-radius: 14px; background: var(--blue-light); display: grid; place-items: center; font-size: 23px; flex: 0 0 auto; }
+.medecin-app .stat b { font-size: 22px; font-weight: 700; display: block; line-height: 1.2; }
+.medecin-app .stat span { font-size: 12.5px; color: var(--sub); }
+.medecin-app .card h3 { font-size: 16.5px; font-weight: 600; line-height: 1.3; letter-spacing: normal; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+.medecin-app .card h3 a, .medecin-app .card h3 button { font-size: 12.5px; color: var(--blue); font-weight: 600; }
+
+/* BADGES */
+.medecin-app .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: #F1F5F9; color: var(--sub); }
+.medecin-app .b-green { background: var(--green-light); color: #16A34A; }
+.medecin-app .b-blue { background: var(--blue-light); color: var(--blue-dark); }
+.medecin-app .b-warn { background: var(--warn-light); color: #B45309; }
+.medecin-app .b-red { background: var(--danger-light); color: var(--danger); }
+.medecin-app .b-gray { background: #F1F5F9; color: var(--sub); }
+
+/* AGENDA TIMELINE */
+.medecin-app .timeline { display: flex; flex-direction: column; }
+.medecin-app .tl-row { display: grid; grid-template-columns: 70px 1fr; gap: 16px; position: relative; }
+.medecin-app .tl-time { font-size: 12.5px; font-weight: 600; color: var(--sub); padding-top: 14px; text-align: right; }
+.medecin-app .tl-line { position: relative; border-left: 2px solid #EDF1F7; padding: 6px 0 6px 20px; min-height: 76px; }
+.medecin-app .tl-dot { position: absolute; left: -7px; top: 20px; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); border: 2.5px solid #fff; box-shadow: 0 0 0 2px var(--blue); }
+.medecin-app .tl-dot.done { background: #16A34A; box-shadow: 0 0 0 2px #16A34A; }
+.medecin-app .tl-dot.absent { background: var(--danger); box-shadow: 0 0 0 2px var(--danger); }
+.medecin-app .tl-dot.empty { background: #D1D5DB; box-shadow: 0 0 0 2px #D1D5DB; }
+.medecin-app .appt { background: var(--bg); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+.medecin-app .appt.confirmed { background: var(--blue-light); }
+.medecin-app .appt .pat-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #CFE4FF, #EAF3FF); display: grid; place-items: center; font-size: 18px; flex: 0 0 auto; }
+.medecin-app .appt-info { flex: 1; min-width: 160px; }
+.medecin-app .appt-info b { font-size: 14px; display: block; }
+.medecin-app .appt-info span { font-size: 12px; color: var(--sub); }
+.medecin-app .appt-actions { display: flex; gap: 7px; }
+.medecin-app .empty-slot { color: #B9C2CF; font-size: 12.5px; font-style: italic; padding: 14px 4px; }
+.medecin-app .empty-state { text-align: center; padding: 30px 20px; color: var(--sub); font-size: 13.5px; }
+.medecin-app .alert-error { background: var(--danger-light); color: #991B1B; border-radius: 12px; padding: 13px 16px; font-size: 13.5px; }
+.medecin-app .alert-info { background: var(--blue-light); border: 1px solid #DCE8FF; border-radius: var(--r); padding: 16px 18px; font-size: 13px; color: var(--txt); }
+.medecin-app .field-error { color: var(--danger); font-size: 11.5px; margin-top: 4px; display: block; }
+
+/* SEMAINE DISPO */
+.medecin-app .week-grid { display: grid; grid-template-columns: 110px repeat(7, 1fr); gap: 8px; }
+.medecin-app .week-grid .wh { font-size: 12px; font-weight: 600; color: var(--sub); text-align: center; padding: 8px 0; text-transform: uppercase; }
+.medecin-app .week-grid .wh.off { color: #C3CAD5; }
+.medecin-app .week-grid .wh.active { color: var(--blue-dark); }
+.medecin-app .day-col { display: flex; flex-direction: column; gap: 6px; }
+.medecin-app .slot-block { background: var(--blue-light); border: 1.5px solid #BAE6FD; border-radius: 10px; padding: 8px 6px; text-align: center; font-size: 11.5px; font-weight: 600; color: var(--blue-dark); cursor: pointer; }
+.medecin-app .slot-block.off { background: #F5F7FA; border-color: #EAEEF4; color: #C3CAD5; }
+.medecin-app .row-label { font-size: 12.5px; font-weight: 600; color: var(--txt); display: flex; align-items: center; padding: 8px 0; }
+.medecin-app .toggle-day { display: flex; align-items: center; gap: 8px; }
+.medecin-app .switch { width: 38px; height: 21px; border-radius: 999px; background: var(--gray); position: relative; flex: 0 0 auto; border: none; padding: 0; }
+.medecin-app .switch::after { content: ""; position: absolute; width: 15px; height: 15px; border-radius: 50%; background: #fff; top: 3px; left: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, .2); }
+.medecin-app .switch.on { background: var(--blue); }
+.medecin-app .switch.on::after { left: auto; right: 3px; }
+.medecin-app .switch:disabled { opacity: .6; cursor: default; }
+.medecin-app .time-row { display: flex; align-items: center; gap: 10px; padding: 10px 4px; border-bottom: 1px solid #F0F3F8; flex-wrap: wrap; }
+.medecin-app .time-row:last-child { border: none; }
+.medecin-app select.time-input, .medecin-app input.time-input { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: inherit; font-size: 13px; color: var(--txt); border: 1.5px solid var(--gray); border-radius: 11px; padding: 9px 13px; background: #fff; min-width: 100px; }
+.medecin-app select.time-input:focus, .medecin-app input.time-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(14, 165, 233, .12); }
+.medecin-app select.time-input:disabled { opacity: .6; }
+
+/* CHIPS (sélecteur de jour) */
+.medecin-app .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.medecin-app .chip { padding: 9px 18px; border-radius: 999px; background: #fff; border: 1.5px solid var(--gray); font-size: 13px; font-weight: 500; color: var(--sub); cursor: pointer; font-family: inherit; }
+.medecin-app .chip.active { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
+
+/* BLOCAGES */
+.medecin-app .blocage-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 4px; border-bottom: 1px solid #F0F3F8; }
+.medecin-app .blocage-row:last-child { border-bottom: none; }
+.medecin-app .blocage-row b { font-size: 13.5px; display: block; }
+.medecin-app .blocage-row span { font-size: 11.5px; color: var(--sub); }
+
+/* PATIENTS */
+.medecin-app .searchbar { display: flex; gap: 12px; background: #fff; border: 1px solid #EAEEF4; border-radius: 16px; padding: 12px; flex-wrap: wrap; }
+.medecin-app .searchbar input.input, .medecin-app .searchbar select.input {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; font-family: inherit; font-size: 14px; color: var(--txt);
+  border: 1.5px solid var(--gray); border-radius: 12px; padding: 12px 15px; background: #fff; flex: 1; min-height: 47px; min-width: 160px;
+}
+.medecin-app .searchbar input.input:focus, .medecin-app .searchbar select.input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(14, 165, 233, .12); }
+.medecin-app table.patients { width: 100%; border-collapse: collapse; }
+.medecin-app table.patients th { text-align: left; font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--sub); padding: 0 12px 14px; border-bottom: 1px solid #EAEEF4; }
+.medecin-app table.patients td { padding: 14px 12px; border-bottom: 1px solid #F0F3F8; font-size: 13.5px; vertical-align: middle; }
+.medecin-app table.patients tr:last-child td { border-bottom: none; }
+.medecin-app .pat-cell { display: flex; align-items: center; gap: 12px; }
+.medecin-app .pat-cell b { font-size: 13.5px; display: block; }
+.medecin-app .pat-cell span { font-size: 11.5px; color: var(--sub); }
+.medecin-app .allergy-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--danger-light); color: var(--danger); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+.medecin-app .vitals { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.medecin-app .vital { background: var(--bg); border-radius: 14px; padding: 13px 15px; }
+.medecin-app .vital b { font-size: 17px; display: block; line-height: 1.3; }
+.medecin-app .vital span { font-size: 11px; color: var(--sub); }
+
+/* FORMULAIRES (Profil) */
+.medecin-app .field { margin-bottom: 4px; }
+.medecin-app .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.medecin-app textarea.input, .medecin-app input.input, .medecin-app select.input {
+  width: 100%; font-family: inherit; font-size: 14px; color: var(--txt); border: 1.5px solid var(--gray);
+  border-radius: 12px; padding: 12px 15px; background: #fff; resize: vertical;
+}
+.medecin-app textarea.input:focus, .medecin-app input.input:focus, .medecin-app select.input:focus {
+  outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(14, 165, 233, .12);
+}
+.medecin-app textarea.input:disabled, .medecin-app input.input:disabled { background: var(--bg); color: var(--sub); }
+
+/* PARAMÈTRES (Notifications) */
+.medecin-app .set-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 2px; border-bottom: 1px solid #F0F3F8; }
+.medecin-app .set-row:last-child { border-bottom: none; }
+.medecin-app .set-row b { font-size: 13.5px; display: block; }
+.medecin-app .set-row span { font-size: 12px; color: var(--sub); }
+
+/* TOASTS */
+.medecin-app .toast-stack { position: fixed; top: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+.medecin-app .toast { padding: 14px 18px; border-radius: 13px; font-size: 13.5px; font-weight: 600; color: #fff; box-shadow: var(--shadow); cursor: pointer; max-width: 320px; }
+.medecin-app .toast-success { background: #16A34A; }
+.medecin-app .toast-error { background: var(--danger); }
+.medecin-app .toast-info { background: var(--blue); }
+
+@media (max-width: 980px) {
+  .medecin-app .toast-stack { left: 16px; right: 16px; top: 16px; }
+  .medecin-app .toast { max-width: none; }
+  .medecin-app .app { grid-template-columns: 1fr; }
+  .medecin-app .sidebar { display: none; }
+  .medecin-app .grid-2, .medecin-app .grid-3, .medecin-app .grid-4 { grid-template-columns: 1fr; }
+}

@@ -60,6 +60,15 @@ export function formatHeureSlot(hhmm) {
   return `${h} h ${m}`;
 }
 
+/** "HH:mm" à partir d'un date_heure API (UTC = heure de Dakar, voir parseApiDate) —
+ * sert de clé commune pour fusionner un RDV avec un créneau de /creneaux. */
+export function formatHeureCleApi(isoString) {
+  const d = parseApiDate(isoString);
+  const h = String(d.getUTCHours()).padStart(2, "0");
+  const m = String(d.getUTCMinutes()).padStart(2, "0");
+  return `${h}:${m}`;
+}
+
 export function formatDateLongLocale(date) {
   const jour = JOURS_LONG[date.getDay()];
   return `${capitalize(jour)} ${date.getDate()} ${MOIS_LONG[date.getMonth()]} ${date.getFullYear()}`;
