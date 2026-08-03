@@ -16,7 +16,9 @@ import MedecinPatients from "./pages/medecin/Patients.jsx";
 import MedecinPatientDetail from "./pages/medecin/PatientDetail.jsx";
 import MedecinProfil from "./pages/medecin/Profil.jsx";
 import MedecinParametres from "./pages/medecin/Parametres.jsx";
+import SecretaireLayout from "./layouts/SecretaireLayout.jsx";
 import SecretaireDashboard from "./pages/secretaire/Dashboard.jsx";
+import SecretairePlanning from "./pages/secretaire/Planning.jsx";
 import AdminDashboard from "./pages/admin/Dashboard.jsx";
 
 export default function App() {
@@ -58,10 +60,13 @@ export default function App() {
         path="/secretaire"
         element={
           <ProtectedRoute roles={["secretaire"]}>
-            <SecretaireDashboard />
+            <SecretaireLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<SecretaireDashboard />} />
+        <Route path="planning" element={<SecretairePlanning />} />
+      </Route>
       <Route
         path="/admin"
         element={
