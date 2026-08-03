@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import DefinirMotDePasse from "./pages/DefinirMotDePasse.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PatientLayout from "./layouts/PatientLayout.jsx";
 import PatientDashboard from "./pages/patient/Dashboard.jsx";
@@ -19,6 +20,8 @@ import MedecinParametres from "./pages/medecin/Parametres.jsx";
 import SecretaireLayout from "./layouts/SecretaireLayout.jsx";
 import SecretaireDashboard from "./pages/secretaire/Dashboard.jsx";
 import SecretairePlanning from "./pages/secretaire/Planning.jsx";
+import SecretaireNouveauRdv from "./pages/secretaire/NouveauRdv.jsx";
+import SecretairePatients from "./pages/secretaire/Patients.jsx";
 import AdminDashboard from "./pages/admin/Dashboard.jsx";
 
 export default function App() {
@@ -27,6 +30,7 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/connexion" element={<Login />} />
       <Route path="/inscription" element={<Register />} />
+      <Route path="/definir-mot-de-passe" element={<DefinirMotDePasse />} />
       <Route
         path="/patient"
         element={
@@ -66,6 +70,8 @@ export default function App() {
       >
         <Route index element={<SecretaireDashboard />} />
         <Route path="planning" element={<SecretairePlanning />} />
+        <Route path="nouveau-rdv" element={<SecretaireNouveauRdv />} />
+        <Route path="patients" element={<SecretairePatients />} />
       </Route>
       <Route
         path="/admin"

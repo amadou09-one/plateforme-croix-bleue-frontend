@@ -5,11 +5,8 @@ import "../styles/secretaire.css";
 const NAV_ITEMS = [
   { to: "/secretaire", label: "Tableau de bord", icon: "📊", end: true },
   { to: "/secretaire/planning", label: "Planning global", icon: "🗓" },
-];
-
-const NAV_ITEMS_A_VENIR = [
-  { label: "Créer un RDV", icon: "➕" },
-  { label: "Patients", icon: "🧑🏾‍🤝‍🧑🏾" },
+  { to: "/secretaire/nouveau-rdv", label: "Créer un RDV", icon: "➕" },
+  { to: "/secretaire/patients", label: "Patients", icon: "🧑🏾‍🤝‍🧑🏾" },
 ];
 
 export default function SecretaireLayout() {
@@ -36,12 +33,6 @@ export default function SecretaireLayout() {
                 <span className="ic">{item.icon}</span>
                 {item.label}
               </NavLink>
-            ))}
-            {NAV_ITEMS_A_VENIR.map((item) => (
-              <span key={item.label} className="nav-item" style={{ opacity: 0.5, cursor: "default" }} title="Bientôt disponible">
-                <span className="ic">{item.icon}</span>
-                {item.label}
-              </span>
             ))}
             <div className="sidebar-foot">
               <span className="nav-item" style={{ opacity: 0.5, cursor: "default" }} title="Bientôt disponible">

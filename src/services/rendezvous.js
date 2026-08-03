@@ -19,11 +19,12 @@ export async function getCreneaux(medecinId, dateKey) {
   return data.data;
 }
 
-export async function creerRendezVous({ medecinId, dateHeure, motif }) {
+export async function creerRendezVous({ medecinId, dateHeure, motif, patientId }) {
   const { data } = await api.post("/rendez-vous", {
     medecin_id: medecinId,
     date_heure: dateHeure,
     motif: motif || undefined,
+    patient_id: patientId || undefined,
   });
   return data.data;
 }
