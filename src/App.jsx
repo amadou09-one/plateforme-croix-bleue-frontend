@@ -22,7 +22,9 @@ import SecretaireDashboard from "./pages/secretaire/Dashboard.jsx";
 import SecretairePlanning from "./pages/secretaire/Planning.jsx";
 import SecretaireNouveauRdv from "./pages/secretaire/NouveauRdv.jsx";
 import SecretairePatients from "./pages/secretaire/Patients.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
 import AdminDashboard from "./pages/admin/Dashboard.jsx";
+import AdminUtilisateurs from "./pages/admin/Utilisateurs.jsx";
 
 export default function App() {
   return (
@@ -77,10 +79,13 @@ export default function App() {
         path="/admin"
         element={
           <ProtectedRoute roles={["admin"]}>
-            <AdminDashboard />
+            <AdminLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<AdminDashboard />} />
+        <Route path="utilisateurs" element={<AdminUtilisateurs />} />
+      </Route>
     </Routes>
   );
 }

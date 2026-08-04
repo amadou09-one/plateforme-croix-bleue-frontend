@@ -1,0 +1,158 @@
+/* Espace Admin — extrait de docs/maquettes/admin-dashboard.html et
+   admin-utilisateurs.html. Sidebar harmonisée en blanc (comme Patient/Médecin/
+   Secrétaire), accent bleu marine (#0F172A) conservé pour l'identité propre à
+   l'Espace Admin. Tout est scopé sous .admin-app pour ne jamais fuiter sur les
+   autres espaces. */
+
+.admin-app {
+  --blue: #0F172A;
+  --blue-dark: #020617;
+  --blue-light: #E9EDF5;
+  --green: #28A745;
+  --green-light: #E9F9EF;
+  --white: #FFFFFF;
+  --bg: #F5F7FA;
+  --txt: #1F2937;
+  --sub: #6B7280;
+  --gray: #D1D5DB;
+  --danger: #EF4444;
+  --danger-light: #FEE2E2;
+  --warn: #F59E0B;
+  --warn-light: #FEF3C7;
+  --r: 18px;
+  --shadow: 0 12px 32px rgba(15, 35, 70, .08);
+
+  font-family: 'Poppins', sans-serif;
+  color: var(--txt);
+  background: var(--bg);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.admin-app, .admin-app * { box-sizing: border-box; }
+.admin-app a { text-decoration: none; color: inherit; }
+.admin-app button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.admin-app .app { display: grid; grid-template-columns: 264px 1fr; min-height: 100vh; }
+
+/* SIDEBAR — harmonisée blanche (voir Espace Médecin / Secrétaire) */
+.admin-app .sidebar { background: #fff; border-right: 1px solid #EAEEF4; padding: 24px 18px; display: flex; flex-direction: column; gap: 8px; position: sticky; top: 0; height: 100vh; }
+.admin-app .logo { display: flex; align-items: center; gap: 12px; padding: 4px 10px 22px; }
+.admin-app .logo-mark { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--blue), #334155); display: grid; place-items: center; color: #fff; font-size: 20px; font-weight: 700; box-shadow: none; }
+.admin-app .logo b { font-size: 15.5px; font-weight: 700; display: block; line-height: 1.2; color: var(--txt); }
+.admin-app .logo span { font-size: 10.5px; color: var(--sub); }
+.admin-app .nav-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding: 10px 12px 6px; }
+.admin-app .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 13px; font-size: 14.5px; font-weight: 500; color: var(--sub); }
+.admin-app .nav-item:hover { background: var(--bg); color: var(--txt); }
+.admin-app .nav-item.active { background: var(--blue); color: #fff; font-weight: 600; box-shadow: 0 8px 18px rgba(15, 23, 42, .35); }
+.admin-app .nav-item .ic { width: 22px; text-align: center; }
+.admin-app .sidebar-foot { margin-top: auto; border-top: 1px solid #EAEEF4; padding-top: 16px; }
+
+/* TOPBAR / PROFIL */
+.admin-app .top-user { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #EAEEF4; border-radius: 13px; padding: 6px 14px 6px 7px; position: relative; cursor: pointer; }
+.admin-app .user-menu { position: absolute; top: calc(100% + 10px); right: 0; background: #fff; border: 1px solid #EAEEF4; border-radius: 14px; box-shadow: var(--shadow); padding: 8px; width: 196px; z-index: 20; }
+.admin-app .user-menu button, .admin-app .user-menu a { display: flex; width: 100%; align-items: center; gap: 11px; padding: 11px 13px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: var(--txt); text-align: left; }
+.admin-app .user-menu button:hover, .admin-app .user-menu a:hover { background: var(--bg); }
+.admin-app .um-sep { height: 1px; background: #F0F3F8; margin: 5px 8px; }
+.admin-app .um-danger { color: var(--danger) !important; }
+.admin-app .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #E2E8F0, #F1F5F9); display: grid; place-items: center; font-size: 18px; flex: 0 0 auto; }
+
+/* MAIN */
+.admin-app .main { padding: 28px 34px; display: flex; flex-direction: column; gap: 24px; }
+.admin-app .app-topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  background: transparent; color: var(--txt); font-size: inherit; font-weight: 400;
+}
+.admin-app .page-title h1 { font-size: 24px; font-weight: 700; line-height: 1.25; letter-spacing: normal; color: var(--txt); }
+.admin-app .page-title p { font-size: 13.5px; color: var(--sub); line-height: 1.5; letter-spacing: normal; }
+.admin-app .top-actions { display: flex; align-items: center; gap: 14px; }
+.admin-app .icon-btn { width: 44px; height: 44px; border-radius: 13px; background: #fff; border: 1px solid #EAEEF4; display: grid; place-items: center; font-size: 18px; position: relative; }
+.admin-app .dot { position: absolute; top: 9px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--danger); border: 2px solid #fff; }
+
+.admin-app .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: inherit; font-size: 14.5px; font-weight: 600; padding: 12px 22px; border-radius: 13px; border: none; cursor: pointer; transition: none; }
+.admin-app .btn:disabled { opacity: .6; cursor: default; }
+.admin-app .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 18px rgba(15, 23, 42, .35); }
+.admin-app .btn-outline { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); }
+.admin-app .btn-ghost { background: #fff; color: var(--sub); border: 1.5px solid var(--gray); }
+.admin-app .btn-danger { background: #fff; color: var(--danger); border: 1.5px solid var(--danger); }
+.admin-app .btn-green { background: #fff; color: #16A34A; border: 1.5px solid #16A34A; }
+.admin-app .btn-sm { padding: 9px 16px; font-size: 13px; border-radius: 11px; }
+
+/* CARDS */
+.admin-app .card { background: #fff; border: 1px solid #EAEEF4; border-radius: var(--r); padding: 22px; transition: none; }
+.admin-app .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.admin-app .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.admin-app .grid-2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; align-items: start; }
+.admin-app .stat { display: flex; align-items: center; gap: 15px; }
+.admin-app .stat .ic { width: 52px; height: 52px; border-radius: 14px; background: var(--blue-light); display: grid; place-items: center; font-size: 23px; flex: 0 0 auto; }
+.admin-app .stat b { font-size: 22px; font-weight: 700; display: block; line-height: 1.2; }
+.admin-app .stat span { font-size: 12.5px; color: var(--sub); }
+.admin-app .card h3 { font-size: 16.5px; font-weight: 600; line-height: 1.3; letter-spacing: normal; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.admin-app .card h3 a, .admin-app .card h3 button { font-size: 12.5px; color: var(--blue); font-weight: 600; }
+
+/* BADGES */
+.admin-app .badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: #F1F5F9; color: var(--sub); }
+.admin-app .b-green { background: var(--green-light); color: #16A34A; }
+.admin-app .b-blue { background: var(--blue-light); color: var(--blue-dark); }
+.admin-app .b-warn { background: var(--warn-light); color: #B45309; }
+.admin-app .b-red { background: var(--danger-light); color: var(--danger); }
+.admin-app .b-gray { background: #F1F5F9; color: var(--sub); }
+
+/* TABLE */
+.admin-app table.tbl { width: 100%; border-collapse: collapse; }
+.admin-app table.tbl th { text-align: left; font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--sub); padding: 0 12px 14px; border-bottom: 1px solid #EAEEF4; }
+.admin-app table.tbl td { padding: 14px 12px; border-bottom: 1px solid #F0F3F8; font-size: 13.5px; vertical-align: middle; }
+.admin-app table.tbl tr:last-child td { border-bottom: none; }
+.admin-app .cell { display: flex; align-items: center; gap: 12px; }
+.admin-app .cell b { font-size: 13.5px; display: block; }
+.admin-app .cell span { font-size: 11.5px; color: var(--sub); }
+.admin-app .empty-state { text-align: center; padding: 30px 20px; color: var(--sub); font-size: 13.5px; }
+.admin-app .alert-error { background: var(--danger-light); color: #991B1B; border-radius: 12px; padding: 13px 16px; font-size: 13.5px; }
+
+/* TABS (filtre rôle des utilisateurs) */
+.admin-app .tabs { display: flex; gap: 8px; background: #fff; border: 1px solid #EAEEF4; border-radius: 14px; padding: 7px; width: fit-content; flex-wrap: wrap; }
+.admin-app .tab { padding: 10px 22px; border-radius: 10px; font-size: 13.5px; font-weight: 600; color: var(--sub); font-family: inherit; cursor: pointer; }
+.admin-app .tab.active { background: var(--blue); color: #fff; }
+
+/* SEARCHBAR + FORMULAIRES */
+.admin-app .searchbar { display: flex; gap: 12px; background: #fff; border: 1px solid #EAEEF4; border-radius: 16px; padding: 12px; flex-wrap: wrap; }
+.admin-app .searchbar input.input, .admin-app .searchbar select.input { flex: 1.4; min-width: 200px; }
+.admin-app .field { margin-bottom: 4px; }
+.admin-app .field label { display: block; font-size: 12.5px; color: var(--sub); margin-bottom: 7px; }
+.admin-app textarea.input, .admin-app input.input, .admin-app select.input {
+  width: 100%; font-family: inherit; font-size: 14px; color: var(--txt); border: 1.5px solid var(--gray);
+  border-radius: 12px; padding: 12px 15px; background: #fff; resize: vertical; min-height: 47px;
+}
+.admin-app textarea.input:focus, .admin-app input.input:focus, .admin-app select.input:focus {
+  outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(15, 23, 42, .12);
+}
+.admin-app textarea.input:disabled, .admin-app input.input:disabled { background: var(--bg); color: var(--sub); }
+.admin-app .field-error { color: var(--danger); font-size: 11.5px; margin-top: 4px; display: block; }
+
+/* GRAPHIQUE EN BARRES CSS (évolution RDV 6 mois) */
+.admin-app .bars { display: flex; align-items: flex-end; gap: 14px; height: 160px; padding-top: 10px; }
+.admin-app .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: flex-end; height: 100%; }
+.admin-app .bar { width: 100%; border-radius: 8px 8px 0 0; background: var(--blue); min-height: 3px; }
+.admin-app .bar-col span { font-size: 11px; color: var(--sub); }
+
+/* MODALE */
+.admin-app .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, .45); display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px; overflow-y: auto; z-index: 50; }
+.admin-app .modal { background: #fff; border-radius: var(--r); padding: 26px; width: 100%; max-width: 560px; box-shadow: var(--shadow); }
+.admin-app .modal h3 { margin-bottom: 18px; }
+
+/* PAGINATION */
+.admin-app .pagination { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 16px; font-size: 13px; color: var(--sub); }
+
+/* TOASTS */
+.admin-app .toast-stack { position: fixed; top: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+.admin-app .toast { padding: 14px 18px; border-radius: 13px; font-size: 13.5px; font-weight: 600; color: #fff; box-shadow: var(--shadow); cursor: pointer; max-width: 320px; }
+.admin-app .toast-success { background: #16A34A; }
+.admin-app .toast-error { background: var(--danger); }
+.admin-app .toast-info { background: var(--blue); }
+
+@media (max-width: 980px) {
+  .admin-app .app { grid-template-columns: 1fr; }
+  .admin-app .sidebar { display: none; }
+  .admin-app .grid-2, .admin-app .grid-3, .admin-app .grid-4 { grid-template-columns: 1fr; }
+  .admin-app .toast-stack { left: 16px; right: 16px; top: 16px; }
+  .admin-app .toast { max-width: none; }
+}
