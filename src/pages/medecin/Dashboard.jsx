@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Topbar from "../../components/medecin/Topbar.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { getAgenda, getStats, changerStatutRdv } from "../../services/medecin.js";
@@ -194,6 +195,16 @@ export default function MedecinDashboard() {
                                 >
                                   ✕ Absent
                                 </button>
+                              </div>
+                            ) : rdv.statut === "honore" ? (
+                              <div className="appt-actions" style={{ alignItems: "center" }}>
+                                <span className={`badge ${badge.cls}`}>{badge.label}</span>
+                                <Link
+                                  className="btn btn-outline btn-sm"
+                                  to={`/medecin/patients/${rdv.patient.id}?rdv=${rdv.id}`}
+                                >
+                                  + Consultation
+                                </Link>
                               </div>
                             ) : (
                               badge && <span className={`badge ${badge.cls}`}>{badge.label}</span>

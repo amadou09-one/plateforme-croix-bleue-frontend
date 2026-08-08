@@ -8,6 +8,7 @@ import PatientLayout from "./layouts/PatientLayout.jsx";
 import PatientDashboard from "./pages/patient/Dashboard.jsx";
 import PatientBook from "./pages/patient/Book.jsx";
 import PatientAppointments from "./pages/patient/Appointments.jsx";
+import PatientDossier from "./pages/patient/Dossier.jsx";
 import PatientProfile from "./pages/patient/Profile.jsx";
 import PatientSettings from "./pages/patient/Settings.jsx";
 import MedecinLayout from "./layouts/MedecinLayout.jsx";
@@ -44,6 +45,7 @@ export default function App() {
         <Route index element={<PatientDashboard />} />
         <Route path="book" element={<PatientBook />} />
         <Route path="appointments" element={<PatientAppointments />} />
+        <Route path="dossier" element={<PatientDossier />} />
         <Route path="profile" element={<PatientProfile />} />
         <Route path="parametres" element={<PatientSettings />} />
       </Route>

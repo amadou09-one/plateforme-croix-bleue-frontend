@@ -14,3 +14,13 @@ export async function getPatient(id) {
   const { data } = await api.get(`/medecin/patients/${id}`);
   return data.data;
 }
+
+export async function ajouterTraitement(patientId, payload) {
+  const { data } = await api.post(`/medecin/patients/${patientId}/traitements`, payload);
+  return data.data;
+}
+
+export async function genererOrdonnance(patientId, payload) {
+  const { data } = await api.post(`/medecin/patients/${patientId}/documents`, payload);
+  return data.data;
+}

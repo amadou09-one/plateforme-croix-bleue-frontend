@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { to: "/patient", label: "Dashboard", icon: "📊", end: true },
   { to: "/patient/book", label: "Prendre RDV", icon: "📅" },
   { to: "/patient/appointments", label: "Mes rendez-vous", icon: "📝" },
+  { to: "/patient/dossier", label: "Dossier médical", icon: "🩺" },
 ];
 
 export default function PatientLayout() {

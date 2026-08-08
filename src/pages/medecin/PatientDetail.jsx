@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import Topbar from "../../components/medecin/Topbar.jsx";
+import ConsultationModal from "../../components/medecin/ConsultationModal.jsx";
+import { useToast } from "../../context/ToastContext.jsx";
 import { getPatient } from "../../services/patients.js";
+import { telechargerDocument } from "../../services/documents.js";
 import { extractErrorMessage } from "../../utils/apiError.js";
 
 const STATUT_BADGE = {
@@ -36,16 +39,47 @@ function calculerImc(poidsKg, tailleCm) {
 
 export default function MedecinPatientDetail() {
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { showToast } = useToast();
   const [fiche, setFiche] = useState(null);
   const [error, setError] = useState("");
+  const [consultationRdv, setConsultationRdv] = useState(null);
+
+  function chargerFiche() {
+    return getPatient(id)
+      .then((data) => {
+        setFiche(data);
+        return data;
+      })
+      .catch((err) => setError(extractErrorMessage(err)));
+  }
 
   useEffect(() => {
     setFiche(null);
     setError("");
-    getPatient(id)
-      .then(setFiche)
-      .catch((err) => setError(extractErrorMessage(err)));
+    chargerFiche().then((data) => {
+      const rdvId = searchParams.get("rdv");
+      if (data && rdvId) {
+        const rdv = data.historique_rendez_vous.find((r) => String(r.id) === rdvId);
+        if (rdv) setConsultationRdv(rdv);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  function fermerModal() {
+    setConsultationRdv(null);
+    if (searchParams.get("rdv")) {
+      searchParams.delete("rdv");
+      setSearchParams(searchParams, { replace: true });
+    }
+  }
+
+  function handleConsultationEnregistree(message) {
+    showToast(message, "success");
+    fermerModal();
+    chargerFiche();
+  }
 
   if (error) {
     return (
@@ -70,7 +104,7 @@ export default function MedecinPatientDetail() {
     );
   }
 
-  const { patient, dossier_medical: dossier, traitements, historique_rendez_vous: historique } = fiche;
+  const { patient, dossier_medical: dossier, traitements, documents, historique_rendez_vous: historique } = fiche;
   const age = calculerAge(patient.date_naissance);
   const imc = calculerImc(dossier.poids_kg, dossier.taille_cm);
 
@@ -100,15 +134,62 @@ export default function MedecinPatientDetail() {
             ) : (
               historique.map((r) => {
                 const badge = STATUT_BADGE[r.statut] ?? { label: r.statut, cls: "b-gray" };
+                const traitementsRdv = traitements.filter((t) => t.rendez_vous_id === r.id);
+                const documentsRdv = documents.filter((d) => d.rendez_vous_id === r.id);
                 return (
-                  <div className="blocage-row" key={r.id}>
-                    <div>
-                      <b>
-                        {formatDateLongue(r.date_heure)} · {formatHeure(r.date_heure)}
-                      </b>
-                      {r.motif && <span>{r.motif}</span>}
+                  <div className="blocage-row" key={r.id} style={{ flexDirection: "column", alignItems: "stretch", gap: 8 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+                      <div>
+                        <b>
+                          {formatDateLongue(r.date_heure)} · {formatHeure(r.date_heure)}
+                        </b>
+                        {r.motif && <span>{r.motif}</span>}
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <span className={`badge ${badge.cls}`}>{badge.label}</span>
+                        {r.statut === "honore" && (
+                          <button type="button" className="btn btn-outline btn-sm" onClick={() => setConsultationRdv(r)}>
+                            {r.consultation ? "Modifier" : "+ Consultation"}
+                          </button>
+                        )}
+                      </div>
                     </div>
-                    <span className={`badge ${badge.cls}`}>{badge.label}</span>
+                    {r.consultation && (r.consultation.diagnostic || r.consultation.observations) && (
+                      <div style={{ fontSize: 12.5, background: "var(--bg)", borderRadius: 10, padding: "8px 12px", display: "flex", flexDirection: "column", gap: 4 }}>
+                        {r.consultation.diagnostic && (
+                          <span>
+                            <b>Diagnostic : </b>
+                            {r.consultation.diagnostic}
+                          </span>
+                        )}
+                        {r.consultation.observations && (
+                          <span>
+                            <b>Observations : </b>
+                            {r.consultation.observations}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    {(traitementsRdv.length > 0 || documentsRdv.length > 0) && (
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                        {traitementsRdv.map((t) => (
+                          <span key={t.id} className="badge b-blue">
+                            💊 {t.medicament}
+                          </span>
+                        ))}
+                        {documentsRdv.map((d) => (
+                          <button
+                            key={d.id}
+                            type="button"
+                            className="badge b-green"
+                            style={{ border: "none" }}
+                            onClick={() => telechargerDocument(d.id, d.titre)}
+                          >
+                            📄 {d.titre}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 );
               })
@@ -181,6 +262,17 @@ export default function MedecinPatientDetail() {
           </div>
         </div>
       </div>
+
+      {consultationRdv && (
+        <ConsultationModal
+          patient={patient}
+          allergies={dossier.allergies}
+          rendezVous={consultationRdv}
+          traitementsExistants={traitements.filter((t) => t.rendez_vous_id === consultationRdv.id)}
+          onClose={fermerModal}
+          onSaved={handleConsultationEnregistree}
+        />
+      )}
     </>
   );
 }

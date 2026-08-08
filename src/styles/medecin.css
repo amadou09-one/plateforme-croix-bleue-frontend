@@ -187,6 +187,11 @@
 }
 .medecin-app textarea.input:disabled, .medecin-app input.input:disabled { background: var(--bg); color: var(--sub); }
 
+/* MODALE (consultation) */
+.medecin-app .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, .45); display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px; overflow-y: auto; z-index: 50; }
+.medecin-app .modal { background: #fff; border-radius: var(--r); padding: 26px; width: 100%; max-width: 560px; box-shadow: var(--shadow); }
+.medecin-app .modal h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+
 /* PARAMÈTRES (Notifications) */
 .medecin-app .set-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 2px; border-bottom: 1px solid #F0F3F8; }
 .medecin-app .set-row:last-child { border-bottom: none; }
